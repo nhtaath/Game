@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Game - Thiệp 20/10</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="background-quiz">
+    <!-- Phần Giao diện Bắt đầu -->
+    <div id="startSection" class="quiz-container">
+        <h1>Quiz về Gia đình</h1>
+        <button id="startButton" onclick="startQuiz()">Bắt đầu</button>
+        <div class="overlay"></div> <!-- Lớp phủ cho phần bắt đầu -->
+    </div>
+
+    <!-- Phần Quiz -->
+    <div class="quiz-container" id="quizSection" style="display: none;">
+        <h1>Quiz về Gia đình</h1>
+        <div id="question"></div>
+        <div class="options">
+            <button class="option" onclick="checkAnswer(0)">Option 1</button>
+            <button class="option" onclick="checkAnswer(1)">Option 2</button>
+            <button class="option" onclick="checkAnswer(2)">Option 3</button>
+            <button class="option" onclick="checkAnswer(3)">Option 4</button>
+            <button class="option" onclick="checkAnswer(4)">Option 5</button>
+            <button class="option" onclick="checkAnswer(5)">Option 6</button>
+        </div>
+        <div id="result"></div>
+        <button id="next" onclick="nextQuestion()" style="display: none;">Câu tiếp theo</button>
+        <div class="overlay"></div> <!-- Lớp phủ cho phần quiz -->
+    </div>
+
+    <!-- Phần Lời chúc -->
+    <div class="card" id="resultCard" style="display:none;">
+        <h1>Chúc mừng 20/10!</h1>
+        <p class="message" id="hiddenMessage">Tứng Anh chúc phái đẹp nhà mìnhhh có một ngày thật vui vẻ và ngập tràn hạnh phúc!</p>
+        <button id="showMessageBtn" onclick="showMessage()">Xem lời chúc</button>
+        <button id="closeButton" onclick="closeWindow()" style="display:none;">Hết rồi</button>
+        <div class="overlay"></div> <!-- Lớp phủ cho phần kết quả -->
+    </div>
+
+    <div id="rosesContainer" class="roses-container"></div>
+    <audio id="backgroundMusic" src="music.mp3" loop></audio>
+    <script src="script.js"></script>
+</body>
+</html>

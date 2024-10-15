@@ -1,0 +1,138 @@
+/* Thiết lập font chữ và kích thước màn hình */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-size: cover;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.background-quiz {
+    background: url('background1.jpg') no-repeat center center; 
+    background-size: cover;
+}
+
+.background-message {
+    background: url('background2.jpg') no-repeat center center; 
+    background-size: cover;
+}
+
+.quiz-container,
+#resultCard {
+    background-color: rgba(255, 255, 255, 0.8); /* Màu trắng với độ trong suốt */
+    backdrop-filter: blur(10px); /* Làm mờ nội dung phía sau */
+    padding: 30px; /* Thêm khoảng cách bên trong cho quiz */
+    border-radius: 20px; /* Bo tròn các góc */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); /* Tạo bóng đổ */
+    text-align: center; /* Căn giữa nội dung */
+    width: 80%; /* Độ rộng 80% */
+    max-width: 600px; /* Độ rộng tối đa cho quiz */
+    position: relative; /* Đặt vị trí tương đối */
+}
+
+#resultCard {
+    padding: 20px; /* Thêm khoảng cách bên trong cho card kết quả */
+    max-width: 400px; /* Độ rộng tối đa cho card kết quả */
+    transition: all 0.3s ease; /* Thêm hiệu ứng chuyển tiếp */
+}
+
+.card {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.options {
+    margin: 20px 0;
+}
+
+.option {
+    margin: 10px;
+    padding: 15px 25px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.option:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.option.correct {
+    background-color: #28a745;
+}
+
+.option.wrong {
+    background-color: #dc3545;
+}
+
+.option.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+#next {
+    margin-top: 20px;
+    padding: 10px 20px;
+    display: none;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Hoa hồng bay */
+.roses-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.rose {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-image: url('rose.png');
+    background-size: cover;
+    animation: fall 5s linear infinite;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-50px);
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+.message {
+    display: none;
+}
+
+.message.show {
+    display: block;
+}
