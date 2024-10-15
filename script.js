@@ -2,43 +2,69 @@ let currentQuestionIndex = 0;
 const questions = [
     {
         question: "Ai dễ thương nhất nhà?",
-        options: ["Kim Thư", "Anh Thư", "Minh Thư", "Tuấn Anh", "Thảo Nhi", "Bà Thảo"],
+        options: ["Kim Thư", "Chị Thư", "Minh Thư", "Tuấn Anh", "Thảo Nhi", "Chị My"],
         answer: 3
     },
     {
         question: "Ngồi kế ai lạnh nhất nhà(mát mát)?",
-        options: ["Bà Thảo", "Tuấn Anh", "Thảo Nhi", "Anh Thư", "Minh Thư", "Kim Thư"],
+        options: ["Chị My", "Tuấn Anh", "Thảo Nhi", "Chị Thư", "Minh Thư", "Kim Thư"],
         answer: 1
     },
     {
         question: "Ai là người trẻ nhất nhà?",
-        options: ["Tuấn Anh", "Minh Thư", "Thảo Nhi", "Anh Thư", "Bà Thảo", "Kim Thư"],
+        options: ["Tuấn Anh", "Minh Thư", "Thảo Nhi", "Chị Thư", "Chị My", "Kim Thư"],
         answer: 0
     }
 ];
 
-// Thêm biến âm thanh
 const musicBefore = new Audio('music_before.mp3');
 const musicAfter = new Audio('music_after.mp3');
-const correctAnswerSound = new Audio('correct_answer.mp3'); // Âm thanh trả lời đúng
-const clapSound = new Audio('clap.mp3'); // Âm thanh vỗ tay
+const correctAnswerSound = new Audio('correct_answer.mp3');
+const clapSound = new Audio('clap.mp3');
 
-// Khi tải trang, ẩn các phần không cần thiết
 window.onload = function() {
-    document.getElementById("closeButton").style.display = 'none'; // Ẩn nút "Hết gòi"
-    document.getElementById("quizSection").style.display = 'none'; // Ẩn phần Quiz
-    document.getElementById("resultCard").style.display = 'none'; // Ẩn phần lời chúc
+    document.getElementById("closeButton").style.display = 'none';
+    document.getElementById("quizSection").style.display = 'none';
+    document.getElementById("resultCard").style.display = 'none';
 };
 
-// Chức năng bắt đầu quiz
+document.addEventListener('DOMContentLoaded', () => {
+    const wrongAnswerBtn = document.querySelectorAll('.option.wrong');
+
+    wrongAnswerBtn.forEach(button => {
+        button.addEventListener('mouseenter', () => {
+            moveButton(button);
+        });
+
+        button.addEventListener('mouseleave', () => {
+            button.style.position = 'static';
+        });
+    });
+});
+
+function moveButton(button) {
+    const moveInterval = setInterval(() => {
+        const randomX = Math.random() * (window.innerWidth - button.offsetWidth);
+        const randomY = Math.random() * (window.innerHeight - button.offsetHeight);
+
+        button.style.position = 'absolute';
+        button.style.left = `${randomX}px`;
+        button.style.top = `${randomY}px`;
+    }, 100);
+
+    button.addEventListener('mouseleave', () => {
+        clearInterval(moveInterval);
+        button.style.position = 'static';
+    });
+}
+
 function startQuiz() {
-    document.getElementById("startSection").style.display = "none"; // Ẩn phần bắt đầu
-    document.getElementById("quizSection").style.display = "block"; // Hiện phần Quiz
-    musicBefore.play(); // Phát âm thanh trước khi bắt đầu
+    document.getElementById("startSection").style.display = "none";
+    document.getElementById("quizSection").style.display = "block";
+    musicBefore.play();
     showQuestion();
 }
 
-// Hiển thị câu hỏi hiện tại
 function showQuestion() {
     const questionElement = document.getElementById("question");
     const options = document.querySelectorAll(".option");
@@ -49,11 +75,11 @@ function showQuestion() {
             option.style.display = 'inline-block';
             option.classList.remove("correct", "wrong", "disabled");
         } else {
-            option.style.display = 'none'; // Ẩn các nút không cần thiết
+            option.style.display = 'none';
         }
     });
     document.getElementById("result").innerText = "";
-    document.getElementById("next").style.display = "none"; // Ẩn nút "Câu tiếp theo"
+    document.getElementById("next").style.display = "none";
 }
 
 function checkAnswer(selected) {
@@ -63,8 +89,8 @@ function checkAnswer(selected) {
     if (selected === correctAnswer) {
         options[selected].classList.add("correct");
         document.getElementById("result").innerText = "Đúng rồi!";
-        correctAnswerSound.play(); // Phát âm thanh khi trả lời đúng
-        clapSound.play(); // Phát âm thanh vỗ tay
+        correctAnswerSound.play();
+        clapSound.play();
     } else {
         options[selected].classList.add("wrong");
         options[correctAnswer].classList.add("correct");
@@ -80,11 +106,10 @@ function nextQuestion() {
     if (currentQuestionIndex < questions.length) {
         showQuestion();
     } else {
-        // Ẩn phần Quiz sau khi hoàn thành
-        document.getElementById("quizSection").style.display = "none"; // Ẩn phần Quiz
-        document.getElementById("resultCard").style.display = "flex"; // Hiện phần lời chúc
-        document.body.classList.remove("background-quiz"); // Xóa background quiz
-        document.body.classList.add("background-message"); // Thêm background cho lời chúc
+        document.getElementById("quizSection").style.display = "none";
+        document.getElementById("resultCard").style.display = "flex";
+        document.body.classList.remove("background-quiz");
+        document.body.classList.add("background-message");
     }
 }
 
@@ -94,23 +119,22 @@ function showMessage() {
     const closeButton = document.getElementById("closeButton");
     const music = document.getElementById("backgroundMusic");
 
-    // Dừng nhạc nền trước khi phát nhạc mới
-    musicBefore.pause(); // Dừng nhạc trước
-    musicBefore.currentTime = 0; // Đặt lại thời gian phát về 0
+    musicBefore.pause();
+    musicBefore.currentTime = 0;
 
     message.classList.add('show');
-    showButton.style.display = 'none'; // Ẩn nút "Xem lời chúc"
-    closeButton.style.display = 'inline-block'; // Hiện nút "Hết gòi"
-    music.play(); // Phát nhạc nền cho lời chúc
-    musicAfter.play(); // Phát âm thanh sau khi hoàn thành quiz
+    showButton.style.display = 'none';
+    closeButton.style.display = 'inline-block';
+    music.play();
+    musicAfter.play();
     createRoses();
 }
+
 function closeWindow() {
     alert('Bái baiiiii!');
     window.close();
 }
 
-// Tạo hiệu ứng hoa hồng rơi
 function createRoses() {
     const rosesContainer = document.getElementById('rosesContainer');
     for (let i = 0; i < 68; i++) {
