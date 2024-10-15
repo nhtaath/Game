@@ -1,4 +1,3 @@
-/* Thiết lập font chữ và kích thước màn hình */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 body {
@@ -25,21 +24,27 @@ body {
 
 .quiz-container,
 #resultCard {
-    background-color: rgba(255, 255, 255, 0.8); /* Màu trắng với độ trong suốt */
-    backdrop-filter: blur(10px); /* Làm mờ nội dung phía sau */
-    padding: 30px; /* Thêm khoảng cách bên trong cho quiz */
-    border-radius: 20px; /* Bo tròn các góc */
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); /* Tạo bóng đổ */
-    text-align: center; /* Căn giữa nội dung */
-    width: 80%; /* Độ rộng 80% */
-    max-width: 600px; /* Độ rộng tối đa cho quiz */
-    position: relative; /* Đặt vị trí tương đối */
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 80%;
+    max-width: 600px;
+    position: relative;
 }
 
 #resultCard {
-    padding: 20px; /* Thêm khoảng cách bên trong cho card kết quả */
-    max-width: 400px; /* Độ rộng tối đa cho card kết quả */
-    transition: all 0.3s ease; /* Thêm hiệu ứng chuyển tiếp */
+    padding: 20px;
+    max-width: 400px;
+    transition: all 0.3s ease;
+    position: absolute;
+    top: 25%; 
+    left: 50%;
+    transform: translate(-50%, -55%);
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(15px);
 }
 
 .card {
@@ -91,15 +96,16 @@ body {
 #next {
     margin-top: 20px;
     padding: 10px 20px;
-    display: none;
     background-color: #007bff;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* Hoa hồng bay */
 .roses-container {
     position: absolute;
     top: 0;
@@ -135,4 +141,26 @@ body {
 
 .message.show {
     display: block;
+}
+
+@keyframes moveAround {
+    0% {
+        transform: translate(0, 0);
+    }
+    25% {
+        transform: translate(50px, -50px);
+    }
+    50% {
+        transform: translate(-50px, 50px);
+    }
+    75% {
+        transform: translate(50px, 50px);
+    }
+    100% {
+        transform: translate(-50px, -50px);
+    }
+}
+
+.option.wrong:hover {
+    animation: moveAround 1s infinite;
 }
